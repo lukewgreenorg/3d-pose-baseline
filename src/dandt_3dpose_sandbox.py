@@ -43,9 +43,9 @@ new_keypoints = [None]*len(keypoints)
 
 for frame in range(len(keypoints)):
     # Normalize x values
-    keypoints[frame][0] = keypoints[frame][0] - boxes[frame][0]
+    keypoints[frame][0] = keypoints[frame][0] #- boxes[frame][0]
     # Normalize y values
-    keypoints[frame][0] = keypoints[frame][1] - boxes[frame][1]
+    keypoints[frame][0] = keypoints[frame][1] #- boxes[frame][1]
     hip_x = (keypoints[frame][0][11] + keypoints[frame][0][12])/2
     hip_y = (keypoints[frame][1][11] + keypoints[frame][1][12])/2
     spine_x = keypoints[frame][0][1]
@@ -162,8 +162,8 @@ def main(_):
             ax = plt.subplot(gs1[subplot_idx - 1], projection='3d')
             ax.view_init(18, -70)    
             logger.debug(np.min(poses3d))
-            if np.min(poses3d) < -1000 and frame != 0:
-                poses3d = before_pose
+            #if np.min(poses3d) < -1000 and frame != 0:
+            #    poses3d = before_pose
 
             p3d = poses3d
             logger.debug(poses3d)
@@ -174,7 +174,7 @@ def main(_):
             plt.savefig(pngName)
             if FLAGS.write_gif:
                 png_lib.append(imageio.imread(pngName))
-            before_pose = poses3d
+            #before_pose = poses3d
 
     if FLAGS.write_gif:
         if FLAGS.interpolation:
